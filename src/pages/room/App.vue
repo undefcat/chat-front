@@ -1,6 +1,6 @@
 <template>
   <div id="room">
-    <h1>채팅방 이름</h1>
+    <h1>{{ room.title }}</h1>
     <el-container>
       <el-container>
         <el-main
@@ -28,9 +28,14 @@
   import Chat from './Chat.vue'
   import UserList from './UserList.vue'
   import InputMessage from './InputMessage'
+  import { mapState } from 'vuex'
+
   export default {
     name: 'App',
     components: { Chat, UserList, InputMessage },
+    computed: {
+      ...mapState(['room']),
+    },
     beforeRouteLeave(to, from, next) {
       this.$store.dispatch('leaveRoom')
       next()

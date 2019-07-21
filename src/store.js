@@ -11,6 +11,7 @@ export default new Vuex.Store({
       name: '',
     },
     rooms: [],
+    room: {},
     messages: [],
     userList: [],
   },
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     chatMessage(state, data) {
       state.messages.push(data)
+    },
+    joinRoom(state, data) {
+      state.room = data
     }
   },
   actions: {
@@ -48,10 +52,13 @@ export default new Vuex.Store({
     joinRoom(_, data) {
       ws.send('joinRoom', data)
     },
-    joinRoomRes(_, data) {
+    joinRoomRes({ state, commit }, data) {
       if (!data.ok) {
         return
       }
+
+      const room = state.rooms.find(room => room.id === data.id)
+      commit('joinRoom', room)
 
       router.push(`/rooms/${data.id}`)
     },
