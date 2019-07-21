@@ -29,9 +29,10 @@
         <el-form-item
             label="인원(최대 16명)"
             label-width="120px">
-          <el-input
+          <el-input-number
               v-model.number="form.total"
-              autocomplete="off"/>
+              :min="2"
+              :max="16"/>
         </el-form-item>
       </el-form>
       <div
