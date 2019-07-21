@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: {
+      id: -1,
       name: '',
     },
     rooms: [],
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setName(state, data) {
+      state.user.id = data.id
       state.user.name = data.name
     },
     roomList(state, data) {
@@ -26,6 +28,9 @@ export default new Vuex.Store({
       state.userList = data.userList
     },
     chatMessage(state, data) {
+      state.messages.push(data)
+    },
+    notice(state, data) {
       state.messages.push(data)
     },
     joinRoom(state, data) {
@@ -73,6 +78,9 @@ export default new Vuex.Store({
     },
     chatMessageRes({ commit }, data) {
       commit('chatMessage', data)
+    },
+    noticeRes({ commit }, data) {
+      commit('notice', data)
     }
   }
 })

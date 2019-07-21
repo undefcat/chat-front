@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div :class="{me: isMe}">
     <div v-if="message.noticeType" :class="message.noticeType">
       {{ message.content }}
     </div>
     <div v-else class="message">
       <div class="user">{{ message.name }}</div>
-      <div class="content">{{ message.content }}</div>
+      <div class="content">: {{ message.content }}</div>
     </div>
   </div>
 </template>
@@ -25,6 +25,11 @@
           }
         }
       }
+    },
+    computed: {
+      isMe() {
+        return this.$store.state.user.id === this.message.userID
+      }
     }
   }
 </script>
@@ -41,12 +46,27 @@
 
   .user {
     width: 20%;
-    margin-right: 15px;
+    margin-right: 10px;
     overflow: hidden;
   }
 
   .content {
     width: 75%;
     word-break: break-all;
+  }
+
+  .me {
+    color: navy;
+    font-weight: bold;
+  }
+
+  .enter {
+    color: blue;
+    font-weight: bold;
+  }
+
+  .leave {
+    color: red;
+    font-weight: bold;
   }
 </style>
