@@ -9,21 +9,13 @@
 
 <script>
   import Message from './Message.vue'
+  import { mapState } from 'vuex'
+
   export default {
     name: 'Chat',
     components: { Message },
-    data() {
-      return {
-        messages: []
-      }
-    },
-    mounted() {
-      this.$bus.$on('chatMessage', data => {
-        const { id, name, content } = data
-        this.messages.push({
-          id, name, content
-        })
-      })
+    computed: {
+      ...mapState(['messages'])
     },
     beforeRouteLeave(to, from, next) {
       // this.$ws.send('')

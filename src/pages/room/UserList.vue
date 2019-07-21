@@ -9,18 +9,13 @@
 
 <script>
   import User from './User.vue'
+  import { mapState } from 'vuex'
+
   export default {
     name: 'UserList',
     components: { User },
-    data() {
-      return {
-        userList: [],
-      }
-    },
-    mounted() {
-      this.$bus.$on('userList', data => {
-        this.userList = data.userList
-      })
+    computed: {
+      ...mapState(['userList'])
     }
   }
 </script>

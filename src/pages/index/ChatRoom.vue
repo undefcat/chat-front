@@ -30,7 +30,7 @@
     },
     methods: {
       enter() {
-        this.$ws.send('joinRoom', { id: this.room.id })
+        this.$store.dispatch('joinRoom', { id: this.room.id })
       }
     }
   }

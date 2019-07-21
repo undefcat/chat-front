@@ -52,17 +52,13 @@
 
 <script>
   import ChatRoom from './ChatRoom.vue'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'ChatRoomList',
     components: { ChatRoom },
-    props: {
-      rooms: {
-        type: Array,
-        default() {
-          return []
-        }
-      }
+    computed: {
+      ...mapState(['rooms'])
     },
     data() {
       return {
@@ -79,6 +75,8 @@
       },
       closeCreateRoomDialog() {
         this.isOpen = false
+        this.form.title = ''
+        this.form.total = ''
       },
       createRoom() {
         let { title, total } = this.form
@@ -101,7 +99,7 @@
           return
         }
 
-        this.$ws.send('createRoom', { title, total })
+        this.$store.dispatch('createRoom', { title, total })
         this.closeCreateRoomDialog()
       }
     }

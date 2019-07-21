@@ -21,10 +21,7 @@
       }
     },
     mounted() {
-      this.$ws.send('setName', {name: 'name'})
-      this.$bus.$on('roomList', data => {
-        this.showCreateRoomDialog(data.rooms)
-      })
+      this.$store.dispatch('setName', {name: 'name'})
     }
   }
 </script>

@@ -25,7 +25,7 @@
         }
 
         this.message = ''
-        this.$ws.send('chatMessage', { id: 0, name: '', content: message })
+        this.$store.dispatch('chatMessage', { id: 0, name: '', content: message })
       }
     }
   }

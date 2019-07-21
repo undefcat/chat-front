@@ -31,6 +31,10 @@
   export default {
     name: 'App',
     components: { Chat, UserList, InputMessage },
+    beforeRouteLeave(to, from, next) {
+      this.$store.dispatch('leaveRoom')
+      next()
+    }
   }
 </script>
 

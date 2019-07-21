@@ -1,6 +1,6 @@
-import bus from './eventbus'
+import store from '../store'
 
-export default class WS {
+class WS {
   constructor() {
     if (!window.WebSocket) {
       alert('최신 브라우저를 사용해주세요 ㅠ_ㅠ')
@@ -16,21 +16,22 @@ export default class WS {
 
       window.console.log(json)
 
-      bus.$emit(json.type, json)
+      // 응답 메세지 타입은 뒤에 Res suffix를 붙이기로 한다.
+      store.dispatch(`${json.type}Res`, json)
     }
 
-    conn.onclose = function (e) {
-      bus.$emit('close', e)
+    conn.onclose = function () {
+      store.dispatch('close')
     }
 
     conn.onerror = function (e) {
-      bus.$emit('error', e)
+      store.dispatch('error', e)
     }
 
     this.conn = conn
   }
 
-  send(type, data) {
+  send(type, data = null) {
     // 연결되지 않은 상태라면
     // 최대 3회 재접속을 시도한다.
     if (this.conn.readyState !== 1) {
@@ -56,8 +57,12 @@ export default class WS {
     // 첫줄은 요청 타입이고
     // 한줄의 공백 이후 본문에 JSON 메세지를 담는다.
     let payload = `${type}\r\n\r\n`
-    payload += JSON.stringify(data)
+    if (data !== null) {
+      payload += JSON.stringify(data)
+    }
 
     this.conn.send(payload.trim())
   }
 }
+
+export default new WS()
