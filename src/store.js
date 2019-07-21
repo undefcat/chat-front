@@ -29,7 +29,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setName(_, data) {
+    setName({ state }, data) {
+      if (state.user.name !== '') {
+        return
+      }
+
       ws.send('setName', data)
     },
     setNameRes({ commit }, data) {
