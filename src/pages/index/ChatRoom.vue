@@ -6,7 +6,7 @@
         {{ room.current }} / {{ room.total }}
       </div>
       <div class="join">
-        <el-button @click="enter">참가</el-button>
+        <el-button @click="enter" :disabled="isFull">참가</el-button>
       </div>
     </div>
   </el-card>
@@ -26,6 +26,11 @@
             current: 0,
           }
         }
+      }
+    },
+    computed: {
+      isFull() {
+        return this.room.total === this.room.current
       }
     },
     methods: {
