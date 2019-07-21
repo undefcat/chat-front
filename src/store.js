@@ -35,6 +35,11 @@ export default new Vuex.Store({
     },
     joinRoom(state, data) {
       state.room = data
+    },
+    clearRoom(state) {
+      state.room = {}
+      state.messages = []
+      state.userList = []
     }
   },
   actions: {
@@ -67,8 +72,9 @@ export default new Vuex.Store({
 
       router.push(`/rooms/${data.id}`)
     },
-    leaveRoom() {
+    leaveRoom({ commit }) {
       ws.send('leaveRoom')
+      commit('clearRoom')
     },
     userListRes({ commit }, data) {
       commit('userList', data)
