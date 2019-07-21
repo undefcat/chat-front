@@ -51,6 +51,9 @@ export default new Vuex.Store({
 
       router.push(`/rooms/${data.id}`)
     },
+    leaveRoom() {
+      ws.send('leaveRoom')
+    },
     userListRes({ commit }, data) {
       commit('userList', data)
     },
