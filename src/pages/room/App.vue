@@ -5,8 +5,9 @@
       <el-container>
         <el-main
             id="chatWrapper"
+            ref="chat"
             class="box">
-          <Chat />
+          <Chat @scroll="scroll"/>
         </el-main>
         <el-footer
             id="inputWrapper"
@@ -35,6 +36,17 @@
     components: { Chat, UserList, InputMessage },
     computed: {
       ...mapState(['room']),
+    },
+    methods: {
+      scroll() {
+        const chat = this.$refs.chat.$el
+        const isScrollable = chat.scrollTop < chat.scrollHeight - chat.clientHeight - 1
+        if (isScrollable) {
+          chat.scrollTop = chat.scrollHeight - chat.clientHeight + 1
+        }
+      }
+    },
+    mounted() {
     },
     beforeRouteLeave(to, from, next) {
       this.$store.dispatch('leaveRoom')

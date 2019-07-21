@@ -1,5 +1,7 @@
 <template>
-  <div id="chat">
+  <div
+      id="chat"
+      ref="chat">
     <message
         v-for="message in messages"
         :key="message.id"
@@ -17,6 +19,11 @@
     computed: {
       ...mapState(['messages'])
     },
+    watch: {
+      messages() {
+        this.$emit('scroll')
+      }
+    },
     beforeRouteLeave(to, from, next) {
       // this.$ws.send('')
       next()
@@ -27,6 +34,5 @@
 <style scoped>
   #chat {
     width: 100%;
-    height: 5000px;
   }
 </style>
