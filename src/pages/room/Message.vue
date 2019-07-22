@@ -23,13 +23,13 @@
             name: 'hi',
             content: 'hello',
           }
-        }
-      }
+        },
+      },
     },
     computed: {
       isMe() {
         return this.$store.state.user.id === this.message.userID
-      }
+      },
     }
   }
 </script>

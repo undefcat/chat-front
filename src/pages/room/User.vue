@@ -13,9 +13,9 @@
             id: Math.random(),
             name: 'noname',
           }
-        }
-      }
-    }
+        },
+      },
+    },
   }
 </script>
 

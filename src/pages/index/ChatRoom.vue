@@ -25,19 +25,19 @@
             total: 0,
             current: 0,
           }
-        }
-      }
+        },
+      },
     },
     computed: {
       isFull() {
         return this.room.total === this.room.current
-      }
+      },
     },
     methods: {
       enter() {
         this.$store.dispatch('joinRoom', { id: this.room.id })
-      }
-    }
+      },
+    },
   }
 </script>
 

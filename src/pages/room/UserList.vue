@@ -15,7 +15,7 @@
     name: 'UserList',
     components: { User },
     computed: {
-      ...mapState(['userList'])
+      ...mapState(['userList']),
     }
   }
 </script>

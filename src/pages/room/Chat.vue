@@ -17,16 +17,12 @@
     name: 'Chat',
     components: { Message },
     computed: {
-      ...mapState(['messages'])
+      ...mapState(['messages']),
     },
     watch: {
       messages() {
         this.$emit('scroll')
-      }
-    },
-    beforeRouteLeave(to, from, next) {
-      // this.$ws.send('')
-      next()
+      },
     },
   }
 </script>

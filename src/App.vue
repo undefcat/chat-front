@@ -12,13 +12,13 @@
         isRequest: false,
         form: {
           name: '',
-        }
+        },
       }
     },
     computed: {
       isOpen() {
         return this.$store.state.user.name === ''
-      }
+      },
     },
     methods: {
       setName() {
@@ -33,7 +33,7 @@
 
         this.$store.dispatch('setName', { name: this.form.name })
         this.isRequest = true
-      }
-    }
+      },
+    },
   }
 </script>

@@ -67,7 +67,7 @@
         form: {
           title: '',
           total: 6,
-        }
+        },
       }
     },
     methods: {
@@ -102,8 +102,8 @@
 
         this.$store.dispatch('createRoom', { title, total })
         this.closeCreateRoomDialog()
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -40,7 +40,7 @@ export default new Vuex.Store({
       state.room = {}
       state.messages = []
       state.userList = []
-    }
+    },
   },
   actions: {
     setName({ state }, data) {
@@ -88,6 +88,6 @@ export default new Vuex.Store({
     },
     noticeRes({ commit }, data) {
       commit('notice', data)
-    }
-  }
+    },
+  },
 })

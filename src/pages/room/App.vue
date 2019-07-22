@@ -41,17 +41,18 @@
       scroll() {
         const chat = this.$refs.chat.$el
         const isScrollable = chat.scrollTop < chat.scrollHeight - chat.clientHeight - 1
+
         if (isScrollable) {
           chat.scrollTop = chat.scrollHeight - chat.clientHeight + 1
         }
-      }
+      },
     },
     mounted() {
     },
     beforeRouteLeave(to, from, next) {
       this.$store.dispatch('leaveRoom')
       next()
-    }
+    },
   }
 </script>
 

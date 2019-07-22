@@ -43,13 +43,13 @@
         isRequest: false,
         form: {
           name: '',
-        }
+        },
       }
     },
     computed: {
       isOpen() {
         return this.$store.state.user.name === ''
-      }
+      },
     },
     methods: {
       showCreateRoomDialog(rooms) {

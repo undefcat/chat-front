@@ -26,8 +26,8 @@
 
         this.message = ''
         this.$store.dispatch('chatMessage', { id: 0, name: '', content: message })
-      }
-    }
+      },
+    },
   }
 </script>
 
