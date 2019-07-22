@@ -17,7 +17,8 @@
           <el-input
               v-model="form.name"
               autocomplete="off"
-              @keydown.native.enter="setName"/>
+              @keydown.native.enter="setName"
+              autofocus/>
         </el-form-item>
       </el-form>
       <div

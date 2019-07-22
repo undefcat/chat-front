@@ -18,12 +18,16 @@
         title="채팅방 만들기"
         width="35%"
         :visible.sync="isOpen">
-      <el-form :model="form">
+      <el-form
+          @submit.native.prevent
+          :model="form">
         <el-form-item
             label="이름"
             label-width="120px">
           <el-input
+              ref="roomTitle"
               v-model="form.title"
+              @keydown.native.enter="createRoom"
               autocomplete="off"/>
         </el-form-item>
         <el-form-item
@@ -73,6 +77,9 @@
     methods: {
       showCreateRoomDialog() {
         this.isOpen = true
+        this.$nextTick(() => {
+          this.$refs.roomTitle.focus()
+        })
       },
       closeCreateRoomDialog() {
         this.isOpen = false
