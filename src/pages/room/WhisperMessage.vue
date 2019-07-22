@@ -46,7 +46,7 @@
   }
 
   .content {
-    width: 580px;
+    width: 560px;
     word-break: break-all;
   }
 </style>
