@@ -1,5 +1,5 @@
 <template>
-  <li>{{ user.name }}</li>
+  <li class="user">{{ user.name }}</li>
 </template>
 
 <script>
@@ -20,5 +20,9 @@
 </script>
 
 <style scoped>
-
+  .user {
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: default;
+  }
 </style>
