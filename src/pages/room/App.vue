@@ -22,6 +22,9 @@
         <UserList />
       </el-aside>
     </el-container>
+    <el-container class="out">
+      <el-button @click="out">나가기</el-button>
+    </el-container>
   </div>
 </template>
 
@@ -46,8 +49,9 @@
           chat.scrollTop = chat.scrollHeight - chat.clientHeight + 1
         }
       },
-    },
-    mounted() {
+      out() {
+        this.$router.replace('/')
+      },
     },
     beforeRouteLeave(to, from, next) {
       this.$store.dispatch('leaveRoom')
@@ -74,5 +78,13 @@
     box-sizing: border-box;
     margin: 10px;
     box-shadow: 0 0 10px #eee;
+  }
+
+  .out {
+    float: right;
+  }
+
+  .out > .el-button {
+    margin-right: 10px;
   }
 </style>
