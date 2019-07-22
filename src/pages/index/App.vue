@@ -3,7 +3,7 @@
     <h1>Open Chat</h1>
     <ChatRoomList />
     <el-dialog
-        title="닉네임 설정"
+        title="닉네임 설정(2 ~ 6글자)"
         width="35%"
         :visible.sync="isOpen"
         :close-on-click-modal="false"
@@ -58,10 +58,10 @@
       },
       setName() {
         const name = this.form.name.trim()
-        if (name.length < 2 || name.length > 16) {
+        if (name.length < 2 || name.length > 6) {
           this.$message({
             type: 'error',
-            message: '이름은 2글자 ~ 16글자여야 합니다.',
+            message: '이름은 2글자 ~ 6글자여야 합니다.',
           })
           return
         }
