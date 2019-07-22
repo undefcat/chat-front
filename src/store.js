@@ -64,6 +64,7 @@ export default new Vuex.Store({
     },
     joinRoomRes({ state, commit }, data) {
       if (!data.ok) {
+        window.alert('방이 꽉 찼습니다.')
         return
       }
 
