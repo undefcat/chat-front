@@ -25,7 +25,7 @@
         }
 
         this.message = ''
-        this.$store.dispatch('chatMessage', { id: 0, name: '', content: message })
+        this.$store.dispatch('message', { id: 0, name: '', content: message })
       },
     },
   }
@@ -34,18 +34,9 @@
 <style scoped>
   #input {
     position: relative;
-    width: 100%;
+    width: 480px;
     height: 100%;
-    margin-top: 10px;
+    float: right;
   }
 
-  #inputItem {
-    width: 80%;
-    margin: 0;
-  }
-
-  #submitItem {
-    width: 20%;
-    margin: 0;
-  }
 </style>

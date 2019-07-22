@@ -1,18 +1,20 @@
 <template>
   <div :class="{me: isMe}">
-    <div v-if="message.noticeType" :class="message.noticeType">
-      {{ message.content }}
-    </div>
-    <div v-else class="message">
-      <div class="user">{{ message.name }}</div>
-      <div class="content">: {{ message.content }}</div>
-    </div>
+    <component
+        :is="currentMessage"
+        class="message"
+        :isMe="isMe"
+        :message="message"/>
   </div>
 </template>
 
 <script>
+  import ChatMessage from './ChatMessage.vue'
+  import NoticeMessage from './NoticeMessage.vue'
+  import WhisperMessage from './WhisperMessage.vue';
   export default {
     name: 'Message',
+    components: { ChatMessage, NoticeMessage, WhisperMessage },
     props: {
       message: {
         type: Object,
@@ -20,16 +22,35 @@
           return {
             id: Math.random(),
             noticeType: null,
-            name: 'hi',
-            content: 'hello',
+            name: '',
+            content: '',
+            fromName: '',
+            toName: '',
           }
         },
       },
     },
     computed: {
       isMe() {
-        return this.$store.state.user.id === this.message.userID
+        const myID = this.$store.state.user.id
+        const messageID = this.message.userID >= 0 ? this.message.userID : this.message.fromID
+
+        return myID === messageID
       },
+      currentMessage() {
+        switch (this.message.type) {
+          case 'chatMessage':
+            return ChatMessage
+
+          case 'notice':
+            return NoticeMessage
+
+          case 'whisperMessage':
+            return WhisperMessage
+        }
+
+        return ChatMessage
+      }
     }
   }
 </script>
@@ -40,33 +61,10 @@
     display: block;
     clear: both;
   }
-  .message > div {
-    float: left;
-  }
-
-  .user {
-    width: 20%;
-    margin-right: 10px;
-    overflow: hidden;
-  }
-
-  .content {
-    width: 75%;
-    word-break: break-all;
-  }
 
   .me {
     color: navy;
     font-weight: bold;
   }
 
-  .enter {
-    color: blue;
-    font-weight: bold;
-  }
-
-  .leave {
-    color: red;
-    font-weight: bold;
-  }
 </style>

@@ -12,6 +12,15 @@
         <el-footer
             id="inputWrapper"
             class="box">
+          <el-select
+              v-model="chatTarget"
+              @change="changeChatTarget">
+            <el-option
+              v-for="target in chatTargetList"
+              :key="target.id"
+              :label="target.name"
+              :value="target.id"/>
+          </el-select>
           <InputMessage />
         </el-footer>
       </el-container>
@@ -37,8 +46,18 @@
   export default {
     name: 'App',
     components: { Chat, UserList, InputMessage },
+    data() {
+      return {
+        chatTarget: -1,
+      }
+    },
     computed: {
       ...mapState(['room']),
+      chatTargetList() {
+        const all = { id: -1, name: '모두에게' }
+        return [all, ...this.$store.state.userList]
+          .filter(user => user.id !== this.$store.state.user.id)
+      },
     },
     methods: {
       scroll() {
@@ -54,6 +73,9 @@
       out() {
         this.$router.replace('/')
       },
+      changeChatTarget() {
+        this.$store.commit('chatTarget', this.chatTarget)
+      }
     },
     beforeRouteLeave(to, from, next) {
       this.$store.dispatch('leaveRoom')
@@ -68,8 +90,12 @@
   }
 
   #room {
-    max-width: 1000px;
+    width: 1000px;
     margin: 0 auto;
+  }
+
+  #inputWrapper {
+    padding-top: 10px;
   }
 
   .el-main {

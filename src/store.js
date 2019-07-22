@@ -15,6 +15,7 @@ export default new Vuex.Store({
     room: {},
     messages: [],
     userList: [],
+    chatTarget: -1,
   },
   mutations: {
     setName(state, data) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     notice(state, data) {
       state.messages.push(data)
     },
+    whisperMessage(state, data) {
+      state.messages.push(data)
+    },
     joinRoom(state, data) {
       state.room = data
     },
@@ -41,6 +45,9 @@ export default new Vuex.Store({
       state.messages = []
       state.userList = []
     },
+    chatTarget(state, id) {
+      state.chatTarget = id
+    }
   },
   actions: {
     setName({ state }, data) {
@@ -80,8 +87,19 @@ export default new Vuex.Store({
     userListRes({ commit }, data) {
       commit('userList', data)
     },
-    chatMessage(_, data) {
-      ws.send('chatMessage', data)
+    message({ state }, data) {
+      if (state.chatTarget === -1) {
+        ws.send('chatMessage', data)
+      } else {
+        const whisperMessage = {
+          id: 0,
+          fromID: 0 ,
+          toID: state.chatTarget,
+          content: data.content,
+        }
+
+        ws.send('whisperMessage', whisperMessage)
+      }
     },
     chatMessageRes({ commit }, data) {
       commit('chatMessage', data)
@@ -89,5 +107,11 @@ export default new Vuex.Store({
     noticeRes({ commit }, data) {
       commit('notice', data)
     },
+    whisperMessageRes({ state, commit }, data) {
+      const from = state.userList.find(user => user.id === data.fromID)
+      const to = state.userList.find(user => user.id === data.toID)
+
+      commit('whisperMessage', {... data, fromName: from.name, toName: to.name })
+    }
   },
 })
