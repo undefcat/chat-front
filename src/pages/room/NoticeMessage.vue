@@ -1,5 +1,5 @@
 <template>
-  <div :class="message.noticeType">
+  <div class="notice" :class="message.noticeType">
     {{ message.content }}
   </div>
 </template>
@@ -20,6 +20,10 @@
 </script>
 
 <style scoped>
+  .notice {
+    text-align: center;
+  }
+
   .enter {
     color: blue;
     font-weight: bold;
