@@ -14,8 +14,6 @@ class WS {
     conn.onmessage = function (e) {
       const json = JSON.parse(e.data)
 
-      window.console.log(json)
-
       // 응답 메세지 타입은 뒤에 Res suffix를 붙이기로 한다.
       store.dispatch(`${json.type}Res`, json)
     }

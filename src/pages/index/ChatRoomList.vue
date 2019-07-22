@@ -66,7 +66,7 @@
         isOpen: false,
         form: {
           title: '',
-          total: '',
+          total: 6,
         }
       }
     },
@@ -77,7 +77,7 @@
       closeCreateRoomDialog() {
         this.isOpen = false
         this.form.title = ''
-        this.form.total = ''
+        this.form.total = 6
       },
       createRoom() {
         let { title, total } = this.form
