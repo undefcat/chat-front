@@ -19,11 +19,13 @@ class WS {
     }
 
     conn.onclose = function () {
-      store.dispatch('close')
+      alert('서버와 연결이 해제되었습니다.')
+      store.commit('close')
     }
 
-    conn.onerror = function (e) {
-      store.dispatch('error', e)
+    conn.onerror = function () {
+      alert('서버 오류. 다시 연결해주세요.')
+      store.commit('error')
     }
 
     this.conn = conn

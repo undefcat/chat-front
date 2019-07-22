@@ -49,7 +49,7 @@
     },
     computed: {
       isOpen() {
-        return this.$store.state.user.name === ''
+        return this.$store.state.user.name === '' && !this.$store.state.isDisconnected
       },
     },
     methods: {

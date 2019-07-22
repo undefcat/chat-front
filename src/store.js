@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isDisconnected: false,
     user: {
       id: -1,
       name: '',
@@ -47,7 +48,13 @@ export default new Vuex.Store({
     },
     chatTarget(state, id) {
       state.chatTarget = id
-    }
+    },
+    close(state) {
+      state.isDisconnected = true
+    },
+    error(state) {
+      state.isDisconnected = true
+    },
   },
   actions: {
     setName({ state }, data) {
