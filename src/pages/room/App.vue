@@ -42,12 +42,14 @@
     },
     methods: {
       scroll() {
-        const chat = this.$refs.chat.$el
-        const isScrollable = chat.scrollTop < chat.scrollHeight - chat.clientHeight - 1
+        this.$nextTick(() => {
+          const chat = this.$refs.chat.$el
+          const isScrollable = chat.scrollTop < chat.scrollHeight - chat.clientHeight - 1
 
-        if (isScrollable) {
-          chat.scrollTop = chat.scrollHeight - chat.clientHeight + 1
-        }
+          if (isScrollable) {
+            chat.scrollTop = chat.scrollHeight - chat.clientHeight + 10
+          }
+        })
       },
       out() {
         this.$router.replace('/')
