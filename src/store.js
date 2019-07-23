@@ -119,6 +119,13 @@ export default new Vuex.Store({
       const to = state.userList.find(user => user.id === data.toID)
 
       commit('whisperMessage', {... data, fromName: from.name, toName: to.name })
+    },
+    banUser(_, data) {
+      ws.send('banUser', data)
+    },
+    banUserRes() {
+      router.replace('/')
+      alert('강퇴당하셨습니다.')
     }
   },
 })
