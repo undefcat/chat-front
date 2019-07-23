@@ -45,6 +45,7 @@ export default new Vuex.Store({
       state.room = {}
       state.messages = []
       state.userList = []
+      state.chatTarget = -1
     },
     chatTarget(state, id) {
       state.chatTarget = id
