@@ -9,7 +9,7 @@ class WS {
 
     this.reconnectionCount = 3
 
-    const conn = new window.WebSocket(`ws://${document.location.host}/ws`)
+    const conn = new window.WebSocket(`wss://${document.location.host}/ws`)
 
     conn.onmessage = function (e) {
       const json = JSON.parse(e.data)
