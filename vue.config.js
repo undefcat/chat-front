@@ -1,5 +1,4 @@
 module.exports = {
-  publicPath: '/dist',
   devServer: {
     proxy: {
       '^/ws': {
