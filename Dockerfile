@@ -2,7 +2,7 @@
 
 FROM node AS builder
 
-MAINTAINER "undefcat <undefcat@gmail.com>"
+LABEL maintainer="undefcat <undefcat@gmail.com>"
 
 RUN apt-get -y update \
 	&& apt-get -y install git
@@ -19,7 +19,7 @@ RUN yarn run build
 
 FROM nginx
 
-MAINTAINER "undefcat <undefcat@gmail.com>"
+LABEL maintainer="undefcat <undefcat@gmail.com>"
 
 COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
